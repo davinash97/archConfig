@@ -1,0 +1,155 @@
+{
+	"layer": "top",
+	"position": "top",
+	"mod": "dock",
+	"height": 30,
+	"exclusive": true,
+	"passthrough": false,
+	"gtk-layer-shell": true,
+	"modules-left": [
+		"custom/applist",
+		"hyprland/window"
+	],
+	"modules-center": [
+		"hyprland/workspaces"
+	],
+	"modules-right": [
+		"network",
+		"network#wifi",
+		"bluetooth",
+		"pulseaudio",
+		"backlight",
+		"battery",
+		"clock",
+		"tray"
+	],
+	"hyprland/workspaces": {
+		"format": "{name}",
+		"on-click": "activate",
+		"swap-icon-label": true,
+		"all-outputs": true,
+		"sort-by-number": true,
+		"format-icons": {
+			"urgent": "󱈸",
+			"active": "󰮯",
+			"default": "󰊠"
+		}
+	},
+"hyprland/window": {
+    "format": "{}", 
+    "rewrite": {
+        "(.*) — Zen Browser": "󰈹   Zen",
+        "(.*)VSCodium": "   Code",
+        "nvim (.*)": "   Neovim",
+        "(.*) — Mozilla Firefox": "󰈹   Firefox",
+        "^$": "󰇄   Desktop"
+    },
+    "on-click-middle": "kill -9 $(hyprctl activewindow -j | jq '.pid')",
+    "separate-outputs": true,
+    "max-length": 25
+},
+	"custom/applist": {
+		"format": "   ArchLinux",
+		"on-click": "~/.config/rofi/scripts/launcher_t7",
+		"on-click-right": "~/.config/rofi/scripts/launcher_t7"
+	},
+	"clock": {
+		"format": "{:%a - %d %b %y | %I:%M %p} ",
+		"format-alt": "{:%A, %d %B, %Y (%R)}  ",
+		"tooltip-format": "<tt><big>{calendar}</big></tt>",
+		"calendar": {
+			"mode": "year",
+			"mode-mon-col": 3,
+			"weeks-pos": "right",
+			"on-scroll": 1,
+			"format": {
+				"months": "<span color='#ffead3'><b>{}</b></span>",
+				"days": "<span color='#ecc6d9'><b>{}</b></span>",
+				"weeks": "<span color='#99ffdd'><b>W{}</b></span>",
+				"weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+				"today": "<span color='#ff6699'><b><u>{}</u></b></span>"
+			}
+		},
+		"actions": {
+			"on-click-right": "mode",
+			"on-scroll-up": "shift_up",
+			"on-scroll-down": "shift_down"
+		}
+	},
+	"pulseaudio": {
+		"interval": 1,
+		"format": "{icon}  {volume}%",
+		"format-muted": "󰝟 MUTED",
+		"on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+		"on-click-right": "pavucontrol",
+		"on-scroll-up": "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+",
+		"on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-",
+		"format-icons": {
+			"default": [
+				"󰕿",
+				"󰖀",
+				"󰕾"
+			]
+		}
+	},
+	"battery": {
+		"states": {
+			"warning": 30,
+			"critical": 15
+		},
+		"format": "{icon}   {capacity}%",
+		"format-icons": [
+			"",
+			"",
+			"",
+			"",
+			""
+		],
+		"format-charging": "󱐋 {capacity}%",
+		"format-plugged": " {capacity}%",
+		"tooltip-format": "Power: {power:.1f}W\nTime: {timeTo}"
+	},
+	"backlight": {
+		"format": "{icon}  {percent}%",
+		"format-icons": [
+			"󰃞",
+			"󰃟",
+			"󰃠"
+		],
+		"on-scroll-up": "brightnessctl s 5%+",
+		"on-scroll-down": "brightnessctl s 5%-"
+	},
+	"network": {
+		"interval": 5,
+		"format": " ",
+		"format-wifi": " ",
+		"format-ethernet": "󰈀",
+		"format-disconnected": " ",
+		"tooltip-format": "{ifname} via {gwaddr}",
+		"on-click": "~/.config/hypr/bin/toggle.sh wifi",
+		"on-click-right": "kitty --class floating nmtui"
+	},
+	"network#wifi": {
+		"interval": 5,
+		"format": "   Off",
+		"format-wifi": "   {essid}",
+		"format-disconnected": "   On",
+		"tooltip-format": "{ifname} via {gwaddr}",
+		"on-click": "~/.config/hypr/bin/toggle.sh wifi",
+		"on-click-right": "kitty --class floating nmtui"
+	},
+	"bluetooth": {
+		"format": "  {status}",
+		"format-disabled": " Off",
+		"format-connected": "  {device_alias}",
+		"tooltip-format": "{controller_alias}\t{controller_address}",
+		"tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+		"tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+		"on-click": "~/.config/hypr/bin/toggle.sh bt",
+		"on-click-right": "blueman-manager"
+	},
+	"tray": {
+		"icon-size": 18,
+		"spacing": 10
+	}
+}
