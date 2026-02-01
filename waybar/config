@@ -35,19 +35,19 @@
 			"default": "󰊠"
 		}
 	},
-"hyprland/window": {
-    "format": "{}", 
-    "rewrite": {
-        "(.*) — Zen Browser": "󰈹   Zen",
-        "(.*)VSCodium": "   Code",
-        "nvim (.*)": "   Neovim",
-        "(.*) — Mozilla Firefox": "󰈹   Firefox",
-        "^$": "󰇄   Desktop"
-    },
-    "on-click-middle": "kill -9 $(hyprctl activewindow -j | jq '.pid')",
-    "separate-outputs": true,
-    "max-length": 25
-},
+	"hyprland/window": {
+		"format": "{}",
+		"rewrite": {
+			"(.*) — Zen Browser": "󰈹   Zen",
+			"(.*)VSCodium": "   Code",
+			"nvim (.*)": "   Neovim",
+			"(.*) — Mozilla Firefox": "󰈹   Firefox",
+			"^$": "󰇄   ArchLinux"
+		},
+		"on-click-middle": "kill -9 $(hyprctl activewindow -j | jq '.pid')",
+		"separate-outputs": true,
+		"max-length": 25
+	},
 	"custom/applist": {
 		"format": "   ArchLinux",
 		"on-click": "~/.config/rofi/scripts/launcher_t7",
@@ -105,8 +105,8 @@
 			"",
 			""
 		],
-		"format-charging": "󱐋 {capacity}%",
-		"format-plugged": " {capacity}%",
+		"format-charging": "󱐋  {capacity}%",
+		"format-plugged": "  {capacity}%",
 		"tooltip-format": "Power: {power:.1f}W\nTime: {timeTo}"
 	},
 	"backlight": {
@@ -141,6 +141,7 @@
 	"bluetooth": {
 		"format": "  {status}",
 		"format-disabled": " Off",
+		"max-length": 20,
 		"format-connected": "  {device_alias}",
 		"tooltip-format": "{controller_alias}\t{controller_address}",
 		"tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
